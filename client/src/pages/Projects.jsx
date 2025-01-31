@@ -3,12 +3,25 @@ import React, { useEffect, useState } from "react";
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);  // Track loading state
 
   // Fetch projects from backend
   useEffect(() => {
     const fetchProjects = async () => {
+      setLoading(true);  // Set loading to true when the request starts
       try {
-        const response = await fetch("http://localhost:5000/api/projects"); // Adjust the URL based on your backend URL
+        const response = await fetch(
+          "https://portfolio-v69x-qr0pg4pts-praneeth76s-projects.vercel.app/api/projects",
+          {
+            method: "GET",
+            credentials: "include",  // Include credentials like cookies if necessary
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
         const data = await response.json();
 
         if (data.error) {
@@ -16,15 +29,18 @@ const Projects = () => {
           return;
         }
 
-        setProjects(data.data); // Assuming the data is in 'data' field
+        setProjects(data.data);  // Assuming the data is in the 'data' field
         setError(null);
       } catch (error) {
+        console.error("Error fetching projects:", error);  // Log error for debugging
         setError("Error fetching projects");
+      } finally {
+        setLoading(false);  // Set loading to false after the request completes
       }
     };
 
     fetchProjects();
-  }, []); // Fetch only on component mount
+  }, []);  // Fetch only on component mount
 
   return (
     <div className="py-6 px-6 sm:px-12 md:px-20 text-center">
@@ -33,11 +49,14 @@ const Projects = () => {
         Here are a few projects I've worked on. Feel free to check them out!
       </p>
 
+      {/* Display loading message */}
+      {loading && <p className="text-gray-500">Loading projects...</p>}
+
       {/* Display error if there's an issue */}
       {error && <p className="text-red-500">{error}</p>}
 
+      {/* Display projects as cards */}
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Display projects as cards */}
         {projects.length > 0 ? (
           projects.map((project) => (
             <div
