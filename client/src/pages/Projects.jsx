@@ -3,44 +3,50 @@ import React, { useEffect, useState } from "react";
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);  // Track loading state
+  const [loading, setLoading] = useState(true); // Track loading state
 
   // Fetch projects from backend
   useEffect(() => {
     const fetchProjects = async () => {
-      setLoading(true);  // Set loading to true when the request starts
+      setLoading(true); // Set loading to true when the request starts
       try {
         const response = await fetch(
           "https://portfolio-v69x-qr0pg4pts-praneeth76s-projects.vercel.app/api/projects",
           {
             method: "GET",
-            credentials: "include",  // Include credentials like cookies if necessary
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include", // Include credentials like cookies if necessary
           }
         );
 
+        // Check if the response is OK
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error(`Network response was not ok: ${response.statusText}`);
         }
 
+        // Parse the JSON data
         const data = await response.json();
 
-        if (data.error) {
-          setError(data.error);
-          return;
+        // Check if the data is in the expected format
+        if (!Array.isArray(data.data)) {
+          throw new Error("Invalid data format received from the server");
         }
 
-        setProjects(data.data);  // Assuming the data is in the 'data' field
+        // Update state with the fetched projects
+        setProjects(data.data);
         setError(null);
       } catch (error) {
-        console.error("Error fetching projects:", error);  // Log error for debugging
-        setError("Error fetching projects");
+        console.error("Error fetching projects:", error); // Log error for debugging
+        setError(`Error fetching projects: ${error.message}`);
       } finally {
-        setLoading(false);  // Set loading to false after the request completes
+        setLoading(false); // Set loading to false after the request completes
       }
     };
 
     fetchProjects();
-  }, []);  // Fetch only on component mount
+  }, []); // Fetch only on component mount
 
   return (
     <div className="py-6 px-6 sm:px-12 md:px-20 text-center">
@@ -49,11 +55,15 @@ const Projects = () => {
         Here are a few projects I've worked on. Feel free to check them out!
       </p>
 
-      {/* Display loading message */}
-      {loading && <p className="text-gray-500">Loading projects...</p>}
+      {/* Display loading spinner */}
+      {loading && (
+        <div className="flex justify-center mt-8">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+        </div>
+      )}
 
       {/* Display error if there's an issue */}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500 mt-4">{error}</p>}
 
       {/* Display projects as cards */}
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -93,7 +103,7 @@ const Projects = () => {
             </div>
           ))
         ) : (
-          <p className="text-gray-600">No projects available.</p>
+          !loading && <p className="text-gray-600">No projects available.</p>
         )}
       </div>
     </div>
