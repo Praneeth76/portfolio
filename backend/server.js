@@ -29,6 +29,7 @@ app.options("*", cors(corsOptions)); // Handle preflight requests for all routes
 // Logging middleware for debugging
 app.use((req, res, next) => {
   console.log(`Incoming request: ${req.method} ${req.url}`);
+  console.log(`Origin: ${req.headers.origin}`); // Log the origin of the request
   next();
 });
 
