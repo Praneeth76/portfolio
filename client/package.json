@@ -27,5 +27,6 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
     "vite": "^6.0.5"
-  }
+  },
+  "proxy": "https://portfolio-v69x-qr0pg4pts-praneeth76s-projects.vercel.app"
 }

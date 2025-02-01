@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/projects",
+      "destination": "https://portfolio-v69x-qr0pg4pts-praneeth76s-projects.vercel.app/api/projects"
+    }
+  ]
+}
