@@ -20,10 +20,11 @@ const corsOptions = {
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Allow credentials (cookies, authorization headers)
 };
 
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // Handles preflight requests
+app.use(cors(corsOptions)); // Enable CORS with the specified options
+app.options("*", cors(corsOptions)); // Handle preflight requests for all routes
 
 // Logging middleware for debugging
 app.use((req, res, next) => {

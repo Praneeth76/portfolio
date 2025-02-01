@@ -17,7 +17,7 @@ const Projects = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            credentials: "include", // Include credentials like cookies if necessary
+            credentials: "include", // Include credentials (cookies, authorization headers)
           }
         );
 
