@@ -16,7 +16,7 @@ const app = express();
 const corsOptions = {
   origin: [
     "http://localhost:5173", // Local frontend
-    "https://portfolio-xi-coral-49.vercel.app" // Deployed frontend
+    "https://portfolio-xi-coral-49.vercel.app", // Deployed frontend
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
@@ -24,6 +24,12 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions)); // Handles preflight requests
+
+// Logging middleware for debugging
+app.use((req, res, next) => {
+  console.log(`Incoming request: ${req.method} ${req.url}`);
+  next();
+});
 
 // Middleware
 app.use(bodyParser.json());
