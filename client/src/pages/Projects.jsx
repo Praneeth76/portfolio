@@ -8,7 +8,6 @@ const Projects = () => {
   // Fetch projects from backend
   useEffect(() => {
     const fetchProjects = async () => {
-      setLoading(true); // Set loading to true when the request starts
       try {
         const response = await fetch(
           "https://portfolio-v69x-qr0pg4pts-praneeth76s-projects.vercel.app/api/projects",
@@ -20,20 +19,20 @@ const Projects = () => {
             credentials: "include", // Include credentials (cookies, authorization headers)
           }
         );
-
+    
         // Check if the response is OK
         if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.statusText}`);
         }
-
+    
         // Parse the JSON data
         const data = await response.json();
-
+    
         // Check if the data is in the expected format
         if (!Array.isArray(data.data)) {
           throw new Error("Invalid data format received from the server");
         }
-
+    
         // Update state with the fetched projects
         setProjects(data.data);
         setError(null);
