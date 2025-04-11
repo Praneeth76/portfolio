@@ -26,18 +26,18 @@ const projects = [
     link: "https://github.com/Praneeth76/sports-scheduler-501.git",
   },
   {
-    name: "Rock-Paper-Scissors",
-    year: "Jan 2024",
-    align: "left",
-    image: "/images/rock-paper-scissors.png",
-    link: "https://github.com/Praneeth76/praneeth-rps-game.git",
-  },
-  {
     name: "Currency Convertor",
     year: "Nov 2023",
-    align: "right",
+    align: "left",
     image: "/images/currency.png",
     link: "https://github.com/Praneeth76/currency-convertor.git",
+  },
+  {
+    name: "Rock-Paper-Scissors",
+    year: "Jan 2024",
+    align: "right",
+    image: "/images/rock-paper-scissors.png",
+    link: "https://github.com/Praneeth76/praneeth-rps-game.git",
   },
 ];
 
