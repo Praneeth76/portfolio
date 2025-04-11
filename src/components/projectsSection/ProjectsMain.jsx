@@ -5,30 +5,37 @@ import { fadeIn } from "../../framerMotion/variants";
 
 const projects = [
   {
+    name: "E-commerce",
+    year: "Mar 2025",
+    align: "right",
+    image: "/images/e-commerce.webp",
+    link: "https://github.com/Praneeth76/E-commerce.git",
+  },
+  {
     name: "Chat App",
     year: "Dec 2024",
-    align: "right",
+    align: "left",
     image: "/images/chat-app.png",
     link: "https://github.com/Praneeth76/chat-app.git",
   },
   {
     name: "Sports Scheduler",
     year: "Sept 2024",
-    align: "left",
+    align: "right",
     image: "/images/sports.webp",
     link: "https://github.com/Praneeth76/sports-scheduler-501.git",
   },
   {
     name: "Rock-Paper-Scissors",
     year: "Jan 2024",
-    align: "right",
+    align: "left",
     image: "/images/rock-paper-scissors.png",
     link: "https://github.com/Praneeth76/praneeth-rps-game.git",
   },
   {
     name: "Currency Convertor",
     year: "Nov 2023",
-    align: "left",
+    align: "right",
     image: "/images/currency.png",
     link: "https://github.com/Praneeth76/currency-convertor.git",
   },
